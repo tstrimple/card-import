@@ -1,14 +1,13 @@
 var util = require('util'),
     request = require('request'),
-    Set = require('./models/set'),
-    Card = require('./models/card'),
     mongoose = require('mongoose'),
     async = require('async'),
-    slug = require('slugs');
+    slug = require('slugs'),
+    Set = require('../src/models/set'),
+    Card = require('../src/models/card');
 
-mongoose.connect('mongodb://localhost/mtgdata');
+mongoose.connect('mongodb://localhost/mtgio');
 var setUrlFormat = 'http://mtgjson.com/json/%s-x.json';
-
 
 Set.find({}, function(err, sets) {
   async.eachLimit(sets, 5, processSet, function(err) {
