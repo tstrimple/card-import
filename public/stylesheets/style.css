@@ -1,0 +1,29 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+
+#card-details {
+  float: left;
+  width: 480px;
+}
+
+#card-image {
+  float: left;
+}
+
+.card-name {
+  white-space: nowrap;
+}
+
+.card-manacost {
+  white-space: nowrap;
+}
+
+.card-type {
+  white-space: nowrap;
+}

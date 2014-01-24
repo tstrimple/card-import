@@ -1,0 +1,49 @@
+extends layout
+
+block content
+  img(src=card.imageUrl(), width='340px')#card-image
+  table#card-details.table.table-condensed.table-hover.table-bordered
+    tr
+      th name
+      td #{card.name}
+    tr
+      th mana cost
+      td #{card.manaCost}
+    tr
+      th cmc
+      td #{card.cmc}
+    tr
+      th type
+      td #{card.type}
+    tr
+      th text
+      td #{card.text}
+    if card.power
+      tr
+        th p/t
+        td #{card.power}/#{card.toughness}
+    if card.loyalty
+      tr
+        th loyalty
+        td #{card.loyalty}
+    tr
+      th expansion
+      td #{card.set}
+    tr
+      th rarity
+      td #{card.rarity}
+    if card.number
+      tr
+        th number
+        td #{card.number}
+    tr
+      th artist
+      td #{card.artist}
+
+  if card.rulings
+    table#card-rulings.table.table-condensed.table-bordered
+      each ruling in card.rulings
+        tr
+          td #{ruling.date}
+          td #{ruling.text}
+

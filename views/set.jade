@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  .table-responsive
+    table.table.table-hover.table-condensed
+      each card in cards
+        tr
+          td.card-name
+            a(href=card.cardUrl()) #{card.name}
+          td.card-manacost #{card.manaCost}
+          td.visible-xs.card-type #{card.type}
+          td.visible-md.visible-sm.visible-lg.card-type #{card.smartType()}
+          td.visible-md(colspan=4).card-description
+            span(title=card.text) #{card.description(120)}
+          td.visible-lg(colspan=4).card-description
+            span(title=card.text) #{card.description(240)}
+          td.card-rarity.hidden-xs #{card.rarity}

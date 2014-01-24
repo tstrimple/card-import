@@ -1,0 +1,16 @@
+extends layout
+
+block content
+  .table-responsive
+    table.table.table-hover.table-condensed
+      each sets, type in setTypes
+        tr
+          th(colspan=5) #{type}    
+          each set in sets
+            tr
+              td &nbsp;
+              td 
+                a(href=set.setUrl()) #{set.name}
+              td #{set.cards} cards
+              td Released #{set.releaseDate}
+              td #{set.block}
