@@ -7,7 +7,7 @@ var util = require('util'),
     slug = require('slugs'),
     cheerio = require('cheerio');
 
-mongoose.connect('mongodb://localhost/mtgdata');
+mongoose.connect('mongodb://localhost/mtgio');
 var gathererUrl = 'http://gatherer.wizards.com/Pages/Card/Details.aspx?multiverseid=%s';
 
 var c = 0;

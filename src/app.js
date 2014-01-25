@@ -1,10 +1,11 @@
 var express = require('express'),
-    set = require('./routes/set'),
+    mtg = require('./controllers/mtg'),
+    admin = require('./controllers/admin'),
     http = require('http'),
     path = require('path'),
     mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/mtgdata');
+mongoose.connect('mongodb://localhost/mtgio');
 
 var app = express();
 
@@ -19,9 +20,12 @@ app.use(express.methodOverride());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(app.router);
 
-app.get('/', set.all);
-app.get('/:set', set.view);
-app.get('/:set/:card', set.viewCard);
+//  admin
+app.get('/admin/import', admin.import);
+
+app.get('/', mtg.listSets);
+app.get('/:set', mtg.viewSet);
+app.get('/:set/:card', mtg.viewCard);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

@@ -58,10 +58,6 @@ cardSchema.methods.imageUrl = function() {
   return util.format('http://mtgimage.com/multiverseid/%s.jpg', this._id);
 }
 
-cardSchema.methods.imageUrl = function() {
-  return util.format('http://mtgimage.com/multiverseid/%s.jpg', this._id);
-}
-
 cardSchema.methods.smartType = function() {
   var smartType = this.type;
   if(this.power && this.toughness) {

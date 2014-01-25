@@ -1,7 +1,7 @@
 var Set = require('../models/set'),
     Card = require('../models/card');
 
-exports.all = function(req, res) {
+exports.listSets = function(req, res) {
   Set.find({}).sort({releaseDate: 1}).exec(function(err, sets) {
     var setsByType = {};
     for (var i = 0; i < sets.length; i++) {
@@ -16,7 +16,7 @@ exports.all = function(req, res) {
   });
 };
 
-exports.view = function(req, res) {
+exports.viewSet = function(req, res) {
   Card.find({ setSlug: req.params.set }).sort({name: 1}).exec(function(err, cards) {
     res.render('set', { title: 'Set: ' + req.params.set, cards: cards });
   });
