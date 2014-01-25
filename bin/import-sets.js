@@ -10,7 +10,7 @@ mongoose.connect('mongodb://localhost/mtgio');
 function refreshSets() {
   importer.getSetCodes(function(err, codes) {
     async.eachLimit(codes, 3, function(code, done) {
-      importer.getSetInfo(code, function(err, info) {
+      importer.getSet(code, function(err, info) {
         info.slug = slugs(info.name);
         Set.findByIdAndUpdate(info.code, info, { upsert: true }, function(err, doc) {
           if(err) {

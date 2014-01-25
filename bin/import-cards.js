@@ -11,10 +11,11 @@ mongoose.connect('mongodb://localhost/mtgio');
 function importCards() {
   importer.getSetCodes(function(err, codes) {
     async.eachLimit(codes, 3, function(code, done) {
-      importer.getSetCards(code, function(err, cards) {
-        async.eachLimit(cards, 10, function(card, done) {
+      importer.getSet(code, function(err, set) {
+        async.eachLimit(set.cards, 10, function(card, done) {
           card.set = code;
           card.slug = slugs(card.name);
+          card.setSlug = slugs(set.name);
           card.multiverseId = card.multiverseid;
           delete card.multiverseid;
           

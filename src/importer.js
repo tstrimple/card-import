@@ -13,26 +13,14 @@ exports.getSetCodes = function(fn) {
   });
 }
 
-exports.getSetInfo = function(setCode, fn) {
+exports.getSet = function(setCode, fn) {
   request(urls.setInfo(setCode), function(err, res, body) {
     if(err || res.statusCode != 200) {
       return fn(err ? err : 'http error: ' + res.statusCode);
     }
 
     var json = JSON.parse(body);
-    delete json.cards;
     fn(err, json);
-  });
-}
-
-exports.getSetCards = function(setCode, fn) {
-  request(urls.setInfo(setCode), function(err, res, body) {
-    if(err || res.statusCode != 200) {
-      return fn(err ? err : 'http error: ' + res.statusCode);
-    }
-
-    var json = JSON.parse(body);
-    fn(err, json.cards);
   });
 }
 
