@@ -19,7 +19,7 @@ function importCards() {
           card.multiverseId = card.multiverseid;
           delete card.multiverseid;
           
-          Card.findByIdAndUpdate(card.multiverseId, { setSlut: card.setSlug }, function(err, c) {
+          Card.findByIdAndUpdate(card.multiverseId, { setSlug: card.setSlug }, function(err, c) {
             if(err) {
               console.log(err, card);
             }
