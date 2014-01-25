@@ -17,8 +17,15 @@ function importCards() {
           card.slug = slugs(card.name);
           card.multiverseId = card.multiverseid;
           delete card.multiverseid;
-          console.log(card);
-          done();
+          
+          Card.findByIdAndUpdate(card.multiverseId, card, { upsert: true }, function(err, c) {
+            if(err) {
+              console.log(err, card);
+            }
+
+            done();
+          });
+
         }, function(err) {
           console.log('done importing set cards!', err);
           done();
