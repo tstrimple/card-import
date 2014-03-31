@@ -2,8 +2,59 @@ doctype html
 html
   head
     title= title
+    meta(name='viewport', content='width=device-width, initial-scale=1.0')
     link(rel='stylesheet', href='/stylesheets/bootstrap.min.css')
     link(rel='stylesheet', href='/stylesheets/style.css')
+    link(rel='stylesheet', href='/stylesheets/bootstrap-typeahead.css')
   body
+    nav.navbar.navbar-default
+      .container-fluid
+        a(href='/').navbar-brand mtg prime
+        ul.nav.navbar-nav.navbar-right
+          li
+            a(href='') collection
+          li 
+            a(href='') my decks
+          li 
+            a(href='') browse cards
+          li
+            form(role='search').navbar-form.navbar-right
+              .form-group
+              input(type='text', placeholder='search').form-control.typeahead
+
     block content
-    script(src='/javascripts/bootstrap.min.js')
+    script(src='/scripts/jquery-2.1.0.min.js')
+    script(src='/scripts/typeahead.min.js')
+    script(src='/scripts/bootstrap.min.js')
+    script.
+      var SimpleTemplateEngine = {
+        compile: function(template) {
+          return {
+            render: function(context) {
+              return template.replace(/\{\{(\w+)\}\}/g,
+                function(match, p1) {
+                  console.log(match);
+                  return jQuery('<div/>').text(context[p1] || '').html();
+              });
+            }
+          }
+        }
+      }
+
+      $(document).ready(function() {
+        $('.typeahead').typeahead({
+          minLength: 2,
+          highlight: true,
+          remote: '/search?q=%QUERY',
+          template: '<p class="oracle-name">{{name}}</p>',
+          engine: SimpleTemplateEngine
+        }).on('typeahead:selected', navigateToCard)
+        .on('typeahead:autocompleted', navigateToCard);
+      });
+
+      function navigateToCard($e, data) {
+        console.log('selected', data);
+      }
+
+    block scripts
+

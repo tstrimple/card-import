@@ -1,6 +1,8 @@
 var express = require('express'),
-    mtg = require('./controllers/mtg'),
     admin = require('./controllers/admin'),
+    browse = require('./controllers/browse'),
+    home = require('./controllers/home'),
+    search = require('./controllers/search'),
     http = require('http'),
     path = require('path'),
     mongoose = require('mongoose');
@@ -20,12 +22,18 @@ app.use(express.methodOverride());
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(app.router);
 
+//  home
+app.get('/', home.index);
+
+//  browse
+app.get('/browse', browse.index);
+
 //  admin
+app.get('/admin', admin.index);
 app.get('/admin/import', admin.import);
 
-app.get('/', mtg.listSets);
-app.get('/:set', mtg.viewSet);
-app.get('/:set/:card', mtg.viewCard);
+//  search
+app.get('/search', search.index);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

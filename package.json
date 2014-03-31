@@ -13,6 +13,8 @@
     "slugs": "~0.1.2",
     "mongoose": "~3.8.4",
     "async": "~0.2.10",
-    "moment": "~2.5.1"
+    "moment": "~2.5.1",
+    "asciify-string": "~0.1.1",
+    "mongoosastic": "~0.2.6"
   }
 }

@@ -1,4 +1,4 @@
-var request = require('request'),
+var request = require('./request'),
     cheerio = require('cheerio'),
     moment = require('moment'),
     urls = require('./data/urls');

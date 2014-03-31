@@ -11,10 +11,11 @@ function refreshSets() {
   importer.getSetCodes(function(err, codes) {
     async.eachLimit(codes, 3, function(code, done) {
       importer.getSet(code, function(err, info) {
+        delete info.cards;
         info.slug = slugs(info.name);
         Set.findByIdAndUpdate(info.code, info, { upsert: true }, function(err, doc) {
           if(err) {
-            console.log(err, json);
+            console.log(err, doc);
             return done();
           }
 

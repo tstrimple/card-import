@@ -1,4 +1,4 @@
-var request = require('request'),
+var request = require('./request'),
     cheerio = require('cheerio'),
     moment = require('moment'),
     urls = require('./data/urls');
@@ -61,6 +61,10 @@ Gatherer.prototype.loadLanguages = function(fn, cb) {
 
 Gatherer.prototype.getCardDetails = function(fn) {
   return {};
+}
+
+Gatherer.prototype.getPrices = function(fn) {
+  fn('not implemented');
 }
 
 Gatherer.prototype.getRulings = function(fn) {

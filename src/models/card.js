@@ -2,37 +2,49 @@ var mongoose = require('mongoose'),
     util = require('util');
 
 var cardSchema = mongoose.Schema({
-  _id: Number,
-  set: String,
-  setSlug: String,
-  layout: String,
+  multiverseId: Number,
+
   name: String,
   slug: String,
-  names: [String],
+  rarity: String,
   manaCost: String,
   cmc: Number,
-  colors: [String],
-  type: String,
-  supertypes: [String],
-  types: [String],
-  subtypes: [String],
-  rarity: String,
-  text: String,
-  oracle: String,
-  flavor: String,
+
+  alternate: {
+    _id: mongoose.Schema.Types.ObjectId,
+    name: String,
+    slug: String,
+    multiverseId: Number,
+  },
+  
+  type: {
+    text: String,
+    types: [String],
+    supertype: String,
+    subtype: String
+  },
+
+  text: {
+    printed: String,
+    oracle: String,
+  },
+
+  flavor: String,  
   artist: String,
-  number: String,
   power: String,
   toughness: String,
   loyalty: Number,
-  variations: [Number],
-  imageName: String,
-  watermark: String,
-  border: String,
-  hand: Number,
-  life: Number,
-  rulings: mongoose.Schema.Types.Mixed,
-  printings: [String]
+
+  extra: {
+    layout: String,
+    names: [String],
+    variations: [Number],
+    colors: [String],
+  },
+
+  rulings: [{ 
+    date: Date, 
+    text: String }],
 });
 
 function smartTrunc(text, length) {
@@ -50,14 +62,6 @@ function smartTrunc(text, length) {
   return text.substr(0, text.lastIndexOf(' ')) + '...';
 }
 
-cardSchema.methods.cardUrl = function() {
-  return '/' + this.setSlug + '/' + this.slug;
-}
-
-cardSchema.methods.imageUrl = function() {
-  return util.format('http://mtgimage.com/multiverseid/%s.jpg', this._id);
-}
-
 cardSchema.methods.smartType = function() {
   var smartType = this.type;
   if(this.power && this.toughness) {
@@ -72,6 +76,10 @@ cardSchema.methods.smartType = function() {
 }
 
 cardSchema.methods.description = function(length) {
+  if(!length) {
+    return this.text;
+  }
+
   return smartTrunc(this.text, length);
 }
 
