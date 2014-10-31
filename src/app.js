@@ -7,7 +7,9 @@ var express = require('express'),
     path = require('path'),
     mongoose = require('mongoose');
 
-mongoose.connect('mongodb://localhost/mtgio');
+var mongoConnection = process.env.MONGODB_CONNECTIONSTRING || 'mongodb://localhost/mtgio';
+
+mongoose.connect(mongoConnection);
 
 var app = express();
 

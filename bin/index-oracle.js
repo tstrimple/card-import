@@ -4,7 +4,9 @@ var util = require('util'),
     mongoose = require('mongoose'),
     cheerio = require('cheerio');
 
-mongoose.connect('mongodb://localhost/mtgio');
+
+var mongoConnection = process.env.MONGODB_CONNECTIONSTRING || 'mongodb://localhost/mtgio';
+mongoose.connect(mongoConnection);
 
 var stream = Oracle.find().stream();
 var processing = 0;

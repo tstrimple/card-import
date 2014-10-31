@@ -9,7 +9,9 @@ var importer = require('../src/importer'),
     asciify = require('asciify-string'),
     util = require('util');
 
-mongoose.connect('mongodb://localhost/mtgio');
+
+var mongoConnection = process.env.MONGODB_CONNECTIONSTRING || 'mongodb://localhost/mtgio';
+mongoose.connect(mongoConnection);
 
 function importCards(set, cards, callback) {  
   process.stdout.clearLine();

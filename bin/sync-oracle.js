@@ -3,7 +3,8 @@ var mongoose = require('mongoose'),
     stream = Oracle.synchronize(),
     count = 0;
 
-mongoose.connect('mongodb://localhost/mtgio');
+var mongoConnection = process.env.MONGODB_CONNECTIONSTRING || 'mongodb://localhost/mtgio';
+mongoose.connect(mongoConnection);
 
 stream.on('data', function(err, doc) {
   process.stdout.write(count + '\r');

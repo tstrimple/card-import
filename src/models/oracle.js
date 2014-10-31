@@ -24,7 +24,9 @@ var oracleSchema = mongoose.Schema({
 }, { collection: 'oracle' });
 
 oracleSchema.plugin(mongoosastic, {
-  index: 'mtgio'
+  index: 'mtgio',
+  host: process.env.ELASTICSEARCH_HOST || 'localhost',
+  port: process.env.ELASTICSEARCH_PORT || 9200
 });
 
 module.exports = mongoose.model('Oracle', oracleSchema);

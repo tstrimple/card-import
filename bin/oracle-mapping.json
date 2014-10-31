@@ -12,6 +12,8 @@ curl -XPOST localhost:9200/mtgio/_search -d'
    }
 }'
 
+curl -X DELETE localhost:9200/mtgio
+
 curl -X PUT localhost:9200/mtgio -d '
 { "settings": {
   "analysis": {
