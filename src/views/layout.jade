@@ -33,7 +33,6 @@ html
             render: function(context) {
               return template.replace(/\{\{(\w+)\}\}/g,
                 function(match, p1) {
-                  console.log(match);
                   return jQuery('<div/>').text(context[p1] || '').html();
               });
             }

@@ -1,0 +1,78 @@
+
+curl -XPOST localhost:9200/mtgio/_search -d'
+{
+   "size": 10,
+   "query": {
+      "match": {
+         "_all": {
+            "query": "drag",
+            "operator": "and"
+         }
+      }
+   }
+}'
+
+curl -X PUT localhost:9200/mtgio -d '
+{ "settings": {
+  "analysis": {
+    "filter": {
+      "nGram_filter": {
+         "type": "nGram",
+         "min_gram": 2,
+         "max_gram": 20
+      }
+    },
+    "analyzer": {
+      "nGram_analyzer": {
+         "type": "custom",
+         "tokenizer": "whitespace",
+         "filter": [
+            "lowercase",
+            "asciifolding",
+            "nGram_filter"
+         ]
+      },
+      "whitespace_analyzer": {
+         "type": "custom",
+         "tokenizer": "whitespace",
+         "filter": [
+            "lowercase",
+            "asciifolding"
+         ]
+      }
+    }
+  }
+}, "mappings": {
+  "oracle": {
+    "_all": {
+      "index_analyzer": "nGram_analyzer",
+      "search_analyzer": "whitespace_analyzer"
+    },
+    "properties": {
+      "cmc": {
+        "type":"integer",
+        "include_in_all": false },
+      "colors": {
+        "type":"string",
+        "include_in_all": false},
+      "loyalty": {
+        "type":"long",
+        "include_in_all": false},
+      "manaCost": {
+        "type":"string",
+        "include_in_all": false},
+      "name": {
+        "type":"string"},
+      "power": {
+        "type":"string",
+        "include_in_all": false},
+      "rarity": {
+        "type":"string"},
+      "text": { 
+        "type":"string"},
+      "toughness": {
+        "type":"string",
+        "include_in_all": false},
+      "types": {
+        "type":"string"}}}}
+}'

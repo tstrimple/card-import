@@ -4,7 +4,8 @@ var Set = require('../models/set'),
 
 exports.index = function(req, res) {
   var hits = [];
-  Oracle.search({query: { match: { autocomplete: req.query.q }}}, function(err, output) {
+
+  Oracle.search({ size: 10, query: { match: { _all: { query: req.query.q, operator: 'and' }}}}, function(err, output) {
     output.hits.hits.forEach(function(hit) {
       hits.push({ 
         id: hit._id, 

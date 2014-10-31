@@ -3,7 +3,7 @@ var mongoose = require('mongoose'),
 
 var oracleSchema = mongoose.Schema({
   _id: String,
-  name: String,
+  name: { type: String },
   rarity: String,
   manaCost: String,
   cmc: Number,

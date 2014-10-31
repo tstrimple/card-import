@@ -11,7 +11,7 @@ var importer = require('../src/importer'),
 
 mongoose.connect('mongodb://localhost/mtgio');
 
-function importCards(set, cards, callback) {
+function importCards(set, cards, callback) {  
   process.stdout.clearLine();
   var processed = 0;
   async.each(cards, function(card, done) {
