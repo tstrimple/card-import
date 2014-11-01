@@ -45,6 +45,8 @@ html
           minLength: 2,
           highlight: true,
           remote: '/search?q=%QUERY',
+          valueKey: 'name',
+          limit: 10,
           template: '<p class="oracle-name">{{name}}</p>',
           engine: SimpleTemplateEngine
         }).on('typeahead:selected', navigateToCard)
